@@ -1,0 +1,158 @@
+{% extends 'survey/base.html' %}
+{% load i18n %}
+{% load survey_extras %}
+{% load static %}
+
+{% block title %} {{survey.name}} {% endblock title %}
+
+{% block extrajs %}
+  {{ block.super }}
+  {{ response_form.media }}
+  {% if asset_context.flatpickr %}
+    <script type="text/javascript" src="{% static 'survey/js/flatpickr.min.js' %}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        flatpickr(".date", {
+          enableTime: false,
+          dateFormat: "Y-m-d",
+        });
+        flatpickr(".time", {
+          enableTime: true,
+          noCalendar: true,
+          dateFormat: "H:i",
+        });
+      });
+    </script>
+	
+  {% endif %}
+{% endblock %}
+
+
+{% block extracss %}
+  {{ block.super }}z
+  {% if asset_context.flatpickr %}
+    <link href="{% static 'survey/css/flatpickr.min.css' %}" rel="stylesheet" type="text/css"/>
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+
+
+	<h1> {{survey.name}} </h1>
+	<div class="survey-description"> {{survey.description|safe}} </div>
+	<div>
+      {% if step and step != 0 %}
+		<form action="{% url 'survey-detail-step' id=survey.id step=step %}" id="myForm" method="post">
+	{% else %}
+		<form action="{% url 'survey-detail' id=survey.id %}" id="myForm"  method="post">
+	{% endif %}
+	    {% csrf_token %}
+	    <div class="form-group">
+	        {{ response_form.participant.label_tag }}
+	        {{ response_form.participant }}
+	    </div>
+        {% for category in categories %}
+            <h3> {{category}} </h3>
+            <p> {{category.description|default_if_none:""}} </p>
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+				    <div class="panel-heading">
+				        <h3 class="panel-title"> <a
+				        data-toggle="collapse show"
+				        data-parent="#accordion"
+				        href="#collapse{{category.slugify}}">
+				            {% trans "Answer this part" %}
+			            </a></h3>
+				    </div>
+                    <div class="category-container">
+				        <div id="collapse{{category.slugify}}" class="panel-collapse collapse show {% if not survey.editable_answers and response_form.response is not None %}in{% endif %}
+				        {{ response_form|collapse_form:category }}">
+				            <div class="panel-body">
+	                           {% include "survey/question.html" %}
+                            </div>
+		                </div>
+                </div>
+            </div>
+        {% empty %}
+            <h3> {% trans "Questions" %} </h3>
+            {% include "survey/question.html" %}
+        {% endfor %}
+
+        <br>
+		{% if survey.editable_answers or response_form.response is None %}
+	    {% if response_form.has_next_step %}
+				    <input
+  			          class="btn btn-default btn-lg"
+				        type="submit"
+				        value="{% trans "Next!" %}"
+        			>
+				{% else %}
+				
+				    <input
+  			          class="btn btn-default btn-lg"
+					  id = "imdonebutton"
+				        type="submit"
+							value="{% trans "I'm done!" %}"
+        			>
+					<script>
+						let backtooriginal = new URLSearchParams(window.location.search).get("backtooriginal")
+						if (backtooriginal==="yes"){					
+						let originalFormData = localStorage.getItem("Original Form Data");
+    // Check if original form data exists
+    if (originalFormData) {
+        // Parse the original form data from JSON
+        originalFormData = JSON.parse(originalFormData);
+        // Select all form inputs
+        let formInputs = document.querySelectorAll('input[id], select[name], textarea[name], input[type="radio"][id], input[type="checkbox"][id]');
+        // Loop through each form input
+		console.log(originalFormData)
+        formInputs.forEach(input => {
+            // Get the input name and ID
+            // let inputName = input.getAttribute('name');
+            let inputId = input.getAttribute('id');
+            // Check if the input is a radio or checkbox, and if it's checked in the original form data
+            if (input.type === 'radio' || input.type === 'checkbox') {
+        // Check if the input's ID is present in the original form data
+            // Check the input based on the original form data
+            if (originalFormData[inputId] === 'checked') {
+				console.log(originalFormData[inputId]);
+                input.checked = true;
+            }
+            } else {if(originalFormData[inputId]!='unchecked'){
+                // Set the value of the input from the original form data
+				console.log(originalFormData[inputId]);
+                input.value = originalFormData[inputId];
+            }
+        }});
+        console.log("Form inputs populated with original form data.");
+    } else {
+        console.log("No original form data found in localStorage.");
+    }}
+
+						console.log("hello");
+						var participant_id =new  URLSearchParams(window.location.search).get('participant_id');
+						const redirected = new URLSearchParams(window.location.search).get('redirected');
+						console.log(participant_id);
+						if (redirected === "yes"){
+							var participant_field=document.getElementById("id_participant");
+							participant_field.value = participant_id;
+							document.getElementById("imdonebutton").onclick=function(event){
+								event.preventDefault();
+								var originalUrl = new URLSearchParams(window.location.search).get('original_url');
+							
+					
+					// If the original URL is provided, redirect back to it
+					if (originalUrl) {
+						
+						window.location.href = originalUrl+'?participant_id='+encodeURIComponent(participant_id)+'&backtooriginal='+encodeURI("yes");
+					}
+					return false;
+				
+				}
+						
+						}
+</script>
+				{% endif %}
+		{% endif %}
+	</form></div>
+{% endblock %}

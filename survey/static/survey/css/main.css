@@ -1,0 +1,240 @@
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.showPasswordToggle {
+  cursor: pointer;
+  transition: all;
+}
+
+.showPasswordToggle:hover {
+  transform: scale(1.2);
+}
+
+.login-url {
+  margin-top: 20px;
+}
+
+
+.registration-body{
+  overflow: hidden;
+  background-color: #e8e8e8;
+}
+
+.site-card-site {
+    border: 1px solid #ccc;
+    padding: 80px;
+    margin: 10px;
+    display: inline-block;
+    cursor: pointer;
+    font-size:20px;
+    background: url(../img/Medical-Bot.jpg) center center repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.site-card-protocol {
+    border: 1px solid #ccc;
+    padding: 80px;
+    margin: 10px;
+    display: inline-block;
+    cursor: pointer;
+    font-size:20px;
+    background: url(../img/protocol.jpg) center center repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+ 
+
+.site-card-survey {
+    border: 1px solid #ccc;
+    padding: 40px;
+    margin: 10px;
+    display: inline-block;
+    cursor: pointer;
+    font-size:20px;
+    background: url(../img/survey.jpg) center center repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+ 
+.site-card-survey a{
+  background: white;
+  padding: 20px 20px;
+  border-radius: 7px;
+}
+
+.site-card-protocol a{
+  background: white;
+  padding: 20px 20px;
+  border-radius: 7px;
+}
+
+.site-card-site a{
+  background: white;
+  padding: 20px 20px;
+  border-radius: 7px;
+}
+
+
+input[type=text], input[type=number], input[type=password], button, select, textarea{
+  font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 28%);
+    border: none;
+    padding: 7px 20px;
+    width: 100%;
+}
+         
+.btn-lg {
+  background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+ 
+.btn-lg:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+#intro ul li {
+  width: 500px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  margin: 1.5em;
+  cursor: pointer;
+  padding: 1em;
+  background: rgb(43, 43, 43);
+  position: relative;
+  color: white;
+  border-radius: 5px;
+  z-index: 9;
+}
+#intro ul li::before,
+#intro ul li::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 5px;
+  width: 105%;
+  transition: all 0.4s;
+}
+#intro ul li::before {
+  left: 0%;
+  height: 130%;
+  background: linear-gradient(to right, #021B79, #328b8b);
+}
+#intro ul li::after {
+  left: -10%;
+  height: 120%;
+  background: #cdd7e1;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.164);
+}
+#intro ul li:hover::before {
+  transform: translateX(-2.5%);
+}
+#intro ul li:hover::after {
+  transform: translateX(10%);
+}
+#intro ul li a{
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.btn-primary{
+  background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
+  padding: 15px 15px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+}
+.btn-primary:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+#desc{
+  margin: auto;
+}
+#desc a{
+  font-weight: 700;
+  font-size: 23px;
+  color: #428bca;
+    text-decoration: none;
+}
+#desc ul li {
+  margin-bottom: 20px;
+  width: 210px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  margin: 1.5em;
+  cursor: pointer;
+  padding: 1em;
+  background: rgb(43, 43, 43);
+  position: relative;
+  color: white;
+  border-radius: 5px;
+  z-index: 9;
+}
+#desc ul li::before,
+#desc ul li::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 5px;
+  width: 105%;
+  transition: all 0.4s;
+}
+#desc ul li::before {
+  left: 0%;
+  height: 130%;
+  background: linear-gradient(to right, #021B79, #328b8b);
+}
+#desc ul li::after {
+  left: -10%;
+  height: 111%;
+  background: #cdd7e1;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.164);
+}
+#desc ul li:hover::before {
+  transform: translateX(-2.5%);
+}
+#desc ul li:hover::after {
+  transform: translateX(10%);
+}
+.fordb{
+  display: inline-flex;
+}

@@ -1,0 +1,19 @@
+<!-- list_clinical_sites.html -->
+{% extends 'survey/base.html' %}
+{% load i18n %}
+
+
+{% load static}
+
+{% block title %}{% trans "Survey submitted" %}{% endblock title %}
+
+{% block body %}
+<h1>{% trans "Clinical Sites"%}</h1>
+<ul>
+    {% for site in sites %}
+    <li class="site-card-site">
+        <a href="{% url 'site_selection' site.id %}">{{ site.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,157 @@
+{% load i18n %}
+{% load static %}
+
+<style>
+    .adverse_container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    button{
+    background-color:rgb(50, 139, 139);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+     table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+  .navbar-nav{
+    color: white;
+  }
+  .nav-link{
+    color: white;
+  }
+</style>
+
+    <nav class="navbar sticky-top flex-md-nowrap p-0 shadow" style="background-color: rgb(50, 139, 139);">
+        <a href="/survey">
+            <img align="left" src="{% static 'UpdateLogo.png' %}" alt="Mushroom Solutions" />
+        </a>
+
+        <ul class="navbar-nav px-3" style="display: flex; flex-direction: row; align-items:center;">
+            <li class="nav-item text-nowrap">
+                <div href="" class="nav-link">
+                    <h4 class="text text-capitalize" style="color: rgb(207, 219, 228);">
+                        <strong>Hello, Welcome to Mushroom Solutions</strong>
+                    </h4>
+                </div>
+            </li>
+            <div>
+                    <ul class="navbar-nav" style="display: flex; flex-direction: row; margin-left:90%;">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'participants' %}">Participants</a>
+                        </li>
+                        <!-- <li class="nav-item" style="margin-left: 20px;">
+                            <a class="nav-link" href="{% url 'adverse_events' %}">Adverse Events</a>
+                        </li> -->
+                        <li class="nav-item" style="margin-left: 20px;">
+                            <a class="nav-link" href="#">link-3</a>
+                        </li>
+                        <li class="nav-item" style="margin-left: 20px;">
+                            <a class="nav-link" href="#">link-4</a>
+                        </li>
+                    </ul>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/timer.js' %}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+    <script type="text/javascript" src="{% static 'survey/js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'survey/js/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'survey/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'survey/js/custom.js' %}"></script>
+    <script type="text/javascript" src="{% static 'survey/js/flatpickr.min.js' %}"></script>
+        <h2>Adverse Events</h2>
+        <div class="adverse_container"></div>
+
+        <a href="{% url 'add_adverse_event' %}" ><button>Add Adverse Event</button></a>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Participant Name</th>
+                    <th>Protocol ID</th>
+                    <th>Event Type</th>
+                    <th>Severity</th>
+                    <th>Description</th>
+                    <th>Action Taken</th>
+                    <th>Outcome</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if no_adverse_events %}
+                    <tr>
+                        <td colspan="7">No record found</td>
+                    </tr>
+                {% else %}
+                    {% for event in adverse_events %}
+                        <tr>
+                            <td>{{ event.participant_name }}</td>
+                            <td>{{ event.protocol_id }}</td>
+                            <td>{{ event.get_event_type_display }}</td>
+                            <td>{{ event.get_severity_display }}</td>
+                            <td>{{ event.description }}</td>
+                            <td>{{ event.get_action_taken_display }}</td>
+                            <td>{{ event.get_outcome_display }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+            </tbody>
+            </thead>
+            
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <footer style="font-size: smaller;text-align:center;">
+            <hr style="height: 1px; border-width: 0; color: gray; background-color: gray;">
+            <p><b>© 2024 Mushroom Solutions. All Rights Reserved.</b></p>
+            <p><a href="https://mushroom.solutions/" target="_blank">https://www.mushroom.solutions</a></p>
+        </footer>

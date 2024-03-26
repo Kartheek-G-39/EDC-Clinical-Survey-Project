@@ -1,0 +1,107 @@
+{% load bootstrap %}
+
+<table class="table table-hover">
+    <!--<thead>
+      <tr>
+        <th> Question  </th>
+        <th> Answers </th>
+      </tr>
+    </thead> -->
+    <tbody>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% for form in response_form %}
+
+	{% if form.field.widget.attrs.category == category.name or category.name == 'No category' and not form.field.widget.attrs.category %}
+        <tr class="{% if form.errors%} danger {% endif %}">
+            <td>
+	            {{ form.label|safe }}
+	            {% if form.field.required %}
+	                <span class="glyphicon glyphicon-asterisk" style="color:red"> </span>
+	            {% endif %}
+	            <span class="help-inline" style="color:red">
+	                <strong> {% for error in  form.errors %}{{ error }}{% endfor %} </strong>
+	            </span> <br>
+                {% if form.field.widget.input_type == 'select' %}
+                <select name="{{form.name}}"{% if form.field.widget.attrs.disabled %} disabled{% endif %}>
+                {% endif %}
+	            {% for field in form %}
+		    {{ field }} <br>
+                {% endfor%}
+                {% if form.field.widget.input_type == 'select' %}
+                </select>
+                {% endif %}
+                
+                
+                
+            </td>
+            
+        </tr>
+	{% endif %}
+{% endfor %}
+</tbody>
+</table>
+<script>
+    document.querySelector('body').addEventListener('click', handleCheckboxClick);
+    var newbutton = document.createElement("button");
+            newbutton.style.display="block";
+            newbutton.type="button";
+            newbutton.textContent="Related Form";
+            var participant = document.getElementById("id_participant");
+ function handleCheckboxClick(event) {
+     // Check if the clicked element is a checkbox
+     if (event.target.type === 'radio') {
+         const checkbox = event.target;
+         if (checkbox.checked) {
+            checkbox.parentElement.appendChild(newbutton);
+            let form = document.getElementById("myForm");
+
+// Create an empty object to store form data
+            let formData = {};
+
+            // Loop through each form element
+            form.querySelectorAll('input, select, textarea').forEach(element => {
+                // Get the element's ID
+                let id = element.id;
+
+                // Check if the element has an ID
+                if (id) {
+                    // Check the type of element
+                    if (element.type === 'checkbox') {
+                        console.log("checkbox");
+                        // For checkboxes, store 'checked' or 'unchecked' based on their state
+                        formData[id] = element.checked ? 'checked' : 'unchecked';
+                    }else {if (element.type === 'radio') {
+                        console.log("radio");
+                        // For checkboxes, store 'checked' or 'unchecked' based on their state
+                        formData[id] = element.checked ? 'checked' : 'unchecked';}
+                         else {
+                        // For other elements, store their values
+                        formData[id] = element.value;
+                    }
+                }
+                }});
+            localStorage.setItem("Original Form Data",JSON.stringify(formData));
+            $.ajax({
+            url: '/survey/redirection/',
+            type: 'POST',
+            data: JSON.stringify({ "checkboxid" : checkbox.id,
+                    "text" : checkbox.value,"participant" : participant.value,
+                    "formdata" : formData,
+
+            }),
+            success: function(response) {
+                if(response.msg=="ok"){
+                    newbutton.style.display="block";
+                    newbutton.onclick= function (){
+                        var currentUrl = window.location.href
+                        console.log(participant.value)
+                        window.location.href = response.redirect_url + '?original_url=' + encodeURIComponent(currentUrl)+'&participant_id='+encodeURIComponent(participant.value)+'&redirected='+encodeURI("yes");}
+                }
+            },
+        });
+         } else {
+             newbutton.style.display="none";
+         }
+     }
+ }
+</script>

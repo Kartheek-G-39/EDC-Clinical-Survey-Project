@@ -1,0 +1,30 @@
+{% extends 'survey/base.html' %}
+{% load i18n %}
+
+{% block body %}
+<div class="fordb">
+<div id="intro">
+	<h1>{% trans "Welcome to the Mushroom EDC Survey app"%}</h1>
+    {% if messages %}
+        <p>
+            {% for message in messages %}
+                <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </p>
+    {% endif %}
+	<ul>
+		{% for survey in surveys %}
+		<li><a href="{{ survey.get_absolute_url }}">{% trans ""%} {{survey.name}}</a></li>
+		{% endfor %}
+        </ul>
+	</div>
+
+	
+	<div id="desc">
+        <ul> <li><a href="/survey/clinical-sites/">Clinical Sites</li> </a></ul>
+    </div>
+</div>
+</div>
+{% endblock %}

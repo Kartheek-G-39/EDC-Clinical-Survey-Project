@@ -1,0 +1,131 @@
+{% load i18n %}
+{% load static %}
+<style>
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0;
+}
+.nav-link{
+  color: white;
+}
+.navbar-nav{
+  background-color: rgb(50, 139, 139);
+ 
+}
+ 
+</style>
+<html lang="en">
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+ 
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-bFqfB8e30lKJBEx23TpzuFBiKdLJ4lvpEL+5a8a2AUGeCgivFt6EmI5g1qOrlIx" crossorigin="anonymous"></script> {% endcomment %}
+ 
+ 
+    <meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Home</title>
+<link rel="icon" href="https://mushroom.solutions/wp-content/uploads/sites/9/2023/06/cropped-logo-6-32x32.jpg" sizes="32x32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% endblock title %}</title>
+<link rel="icon" href="https://mushroom.solutions/wp-content/uploads/sites/9/2023/06/cropped-logo-6-32x32.jpg" sizes="32x32">
+<link href="{% static 'survey/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{% static 'survey/css/custom.css' %}" />
+
+<!-- Bootstrap CSS -->
+<link href="{% static 'survey/css/bootstrap.min.css'%}" rel="stylesheet" />
+<link href="{% static 'survey/css/main.css'%}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link href="{% static 'survey/css/flatpickr.min.css' %}" rel="stylesheet" type="text/css"/>
+    {% block extrajs %}{% endblock %}
+</head>
+<body>
+<nav
+      class="navbar sticky-top flex-md-nowrap p-0 shadow" style="background-color: rgb(50, 139, 139);">
+<a  href="/survey">
+<img align="left" style="margin-right: 20px;" src="{% static 'UpdateLogo.png' %}" alt="Mushroom Solutions" />
+</a>
+<ul class="navbar-nav px-3" style="display: flex; flex-direction: row; align-items:center;">
+<li class="nav-item text-nowrap">
+<div href="" class="nav-link">
+<h4 class="text text-capitalize" style="color: rgb(207, 219, 228);">
+<strong style="margin-left: 80%; color: #333;">Hello, Welcome to Mushroom Solutions
+<!-- <ul >
+          {% for survey in surveys %}
+<li><a href="{{ survey.get_absolute_url }}">{% trans ""%} {{survey.name}}</a></li>
+          {% endfor %}
+</ul> -->
+</strong>
+<ul class="navbar-nav" style="display: flex; flex-direction: row; margin-left:80%;">
+<li class="nav-item">
+<a class="nav-link active" aria-current="page" href="{% url 'participants' %}">Participants</a>
+</li>
+<li class="nav-item"  style="margin-left: 20px;">
+<a class="nav-link" href="{% url 'adverse_events' %}">Adverse Events</a>
+</li>
+<li class="nav-item"  style="margin-left: 20px;">
+<a class="nav-link" href="#">link-3</a>
+</li>
+<li class="nav-item" style="margin-left: 20px;">
+<a class="nav-link" href="#">link-4</a>
+</li>
+</ul>
+<!-- <li class="dropdown" style="margin-left: 500px;">
+<a href="#" class="dropbtn">Dropdown</a>
+<div class="dropdown-content">
+<a href="{% url 'add_participant' %}">Add Participant</a>
+<a href="{% url 'adverse_events' %}">Adverse Events</a>
+<a href="#">Link 3</a>
+</div>
+</li> -->
+ 
+ 
+      </h4>
+</div>
+</li>
+</ul>
+</nav>
+</nav>
+ 
+          <!-- Main Content -->
+<main role="main">
+<div class="container" id="wrap">
+				   {% block wrapper %}{% endblock %}
+<div class="well" id="container-main">
+			      {% block body %}{% endblock %}
+</div>
+</div>
+</div>
+</main>
+</div>
+</div> 
+<footer style="font-size: smaller;text-align:center;">
+<hr style="height: 1px; border-width: 0; color: gray; background-color: gray;">
+<p><b>© 2024 Mushroom Solutions. All Rights Reserved.</b></p>
+<p><a href="https://mushroom.solutions/" target="_blank">https://www.mushroom.solutions</a></p>
+</footer>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/timer.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script type="text/javascript" src="{% static 'survey/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'survey/js/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'survey/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'survey/js/custom.js' %}"></script>
+<script type="text/javascript" src="{% static 'survey/js/flatpickr.min.js' %}"></script>
+
+ 
+  </body>
+  </html>

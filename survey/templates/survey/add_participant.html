@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Participant</title>
+<link rel="icon" href="{% static 'img/favicon.ico'%}"/>
+<style>
+  input[type="submit"] {
+      background-color: rgb(50, 139, 139);
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+  input[type="submit"]:hover {
+      background-color: rgb(50, 139, 139);
+  }
+.navbar-nav{
+    color: white;
+  }
+  .nav-link{
+    color: white;
+  }
+  
+  
+  </style>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+        margin-top: 0;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="text"], input[type="date"], select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    ul {
+      list-style-type: none;
+      margin: 0px;
+      padding: 0;
+  }
+    .nav-link1{
+      color: white;
+      margin-left: 2  0px;
+
+    }
+    .navbar-nav1{
+      color: white;
+      margin-left: 70%;
+    }
+    .list{
+      margin-left: 300%;
+    }
+</style>
+</head>
+<body>
+    <nav
+    class="navbar sticky-top flex-md-nowrap p-0 shadow" style="background-color: rgb(50, 139, 139);">
+    <a  href="/survey">
+        <img align="left" src="{% static 'UpdateLogo.png' %}" alt="Mushroom Solutions" />
+    </a>
+    <ul class="navbar-nav px-3" style="display: flex; flex-direction: row; align-items:center;">
+    <li class="nav-item text-nowrap">
+    <div href="" class="nav-link">
+    <h4 class="text text-capitalize" style="color: rgb(47, 37, 8); margin-right: -50%;">
+    <strong>Hello, Welcome to Mushroom Solutions
+    </strong>
+</div>
+      <div class = "list">
+        <ul class="navbar-nav1" style="display: flex; flex-direction: row; margin-left:90%;">
+          <!-- <li class="nav-item1">
+            <a class="nav-link1" aria-current="page" href="{% url 'add_participant' %}">Add Participant</a>
+          </li> -->
+          <li class="nav-item1">
+            <a class="nav-link1" href="#">link-3</a>
+          </li>
+          <li class="nav-item1">
+            <a class="nav-link1" href="#">link-4</a>
+          </li>
+        </ul>
+      </div>
+    </h4>
+    </li>
+    </ul>
+  </nav>
+      
+</nav>
+<div class="container">
+    <h2>Participant Form</h2>
+    <form action="{% url 'add_participant' %}" method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="birth_date">Birth Date:</label>
+        <input type="date" id="birth_date" value="2024-03-18" name="birth_date" required>
+
+        <label for="clinical_site">Clinical Site:</label>
+        <select id="clinical_site" name="clinical_site" required>
+            <option value="">Select Clinical Site</option>
+            {% for clinical_site in clinical_sites %}
+            <option value="{{ clinical_site.id }}">{{ clinical_site.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="protocols">Protocols:</label>
+        <select id="protocols" name="protocols" required>
+            <option value="">Select Protocol</option>
+            {% for protocol in protocols %}
+                <option value="{{ protocol.id }}">{{ protocol.title }}</option>
+            {% endfor %}
+        </select>
+        <label for="enrollment_status">Enrollment Status:</label>
+        <select id="enrollment_status" name="enrollment_status" required>
+            <option value="">Select Enrollment Status</option>
+            {% for stat in status %}
+            <option value="{{ stat.0 }}">{{ stat.1 }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="exclusion_reason">Exclusion Reason:</label>
+        <select id="exclusion_reason" name="exclusion_reason" required>
+            <option value="">Select Exclusion Reason</option>
+            {% for reason in reasons %}
+            <option value="{{ reason.0 }}">{{ reason.1 }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="enrollment_date">Enrollment Date:</label>
+        <input type="date" id="enrollment_date" value="{{ date }}" name="enrollment_date">
+
+        <label for="screening_date">Screening Date:</label>
+        <input type="date" id="screening_date" value="{{ date }}" name="screening_date">
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+{% extends 'survey/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block body %}
+    <style>
+        .container {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #dee2e6;
+            /* Add border around the container */
+        }
+
+
+
+        .cell {
+            display: table-cell;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            /* Add border around each cell */
+        }
+
+        h1 {
+            color: rgb(0, 64, 92);
+            /* Set a primary color for headings */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            
+            /* Add some space between tables */
+        }
+
+        th,
+        td {
+            border: 1px solid #dee2e6;
+            /* Use Bootstrap's border color */
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: rgb(50, 139, 139);
+        }
+
+        .navbar-nav {
+            display: flex;
+            flex-direction: row;
+            margin-left: auto;
+        }
+
+        .nav-item {
+            margin-left: 20px;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+
+        /* Participant details */
+        .participant-details {
+            margin-bottom: 20px;
+        }
+        .row1{
+            display: grid;
+            align-content: center;
+            justify-content: space-around;
+            width: 100%;
+            font-size:medium;
+        }
+        h1{
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+                <div class="row1">
+                    <div class="cell participant-details">
+                        <h1>Participant Details</h1>
+                        <p>Participant Id: {{ participant.id }}</p>
+                        <p>Participant Name: {{ participant.name }}</p>
+                        <p>Birth Date: {{ participant.birth_date }}</p>
+                        <p>Clinical Site: {{ participant.clinical_site }}</p>
+                    </div>
+                </div>
+    <div class="container">
+        <div class="row">
+            <div class="cell">
+                <h1>Adverse Events Record</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Protocol ID</th>
+                            <th>Event Type</th>
+                            <th>Severity</th>
+                            <th>Description</th>
+                            <th>Action Taken</th>
+                            <th>Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in adverse_events %}
+                        <tr>
+                            <td>{{ event.protocol_id }}</td>
+                            <td>{{ event.event_type }}</td>
+                            <td>{{ event.severity }}</td>
+                            <td>{{ event.description }}</td>
+                            <td>{{ event.action_taken }}</td>
+                            <td>{{ event.outcome }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <div class="cell">
+            <h1>Medication Records</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Medication Name</th>
+                        <th>Dosage</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for medication in medications %}
+                    <tr>
+                        <td>{{ medication.medication }}</td>
+                        <td>{{ medication.dosage }}</td>
+                        <td>{{ medication.start_date }}</td>
+                        <td>{{ medication.end_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br><br>
+    <br>
+    <br>
+    <br>
+    <br><br>
+    <br>
+    <br>
+
+    {% comment %} <footer style="font-size: smaller;text-align:center;">
+        <hr style="height: 1px; border-width: 0; color: gray; background-color: gray;">
+        <p><b>© 2024 Mushroom Solutions. All Rights Reserved.</b></p>
+        <p><a href="https://mushroom.solutions/" target="_blank">https://www.mushroom.solutions</a></p>
+    </footer> {% endcomment %}
+
+{% endblock %}

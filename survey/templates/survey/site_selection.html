@@ -1,0 +1,31 @@
+{% extends 'survey/base.html' %}
+{% load i18n %}
+
+{% block body %}
+<h1>Site: {{ site.name }}</h1>
+
+<form method="get" action=".">
+    <input type="text" name="search" placeholder="{% trans 'Search protocols and surveys' %}" value="{{ search_query }}">
+    <button type="submit">{% trans "Search" %}</button>
+</form>
+
+<h2>{% trans "Protocols" %}</h2>
+<ul>
+    {% for protocol in protocols %}
+    <li class="site-card-protocol"><a href="{% url 'protocol_detail' protocol.id %}">{{ protocol.title }}</a></li>
+    {% empty %}
+    <li>{% trans "No protocols found for this site." %}</li>
+    {% endfor %}
+</ul>
+
+<h2>{% trans "Surveys" %}</h2>
+<ul>
+    {% for survey_link in surveys %}
+    <li class="site-card-survey"><a href="{% url 'survey_detail' survey_link.survey.id %}">{{ survey_link.survey.name }}</a></li>
+    {% empty %}
+    <li>{% trans "No surveys found for this site." %}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'list_clinical_sites' %}">{% trans "Back to Sites" %}</a>
+{% endblock %}

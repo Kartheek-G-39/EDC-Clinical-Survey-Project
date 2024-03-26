@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Show Surveys</button>
+</form>
+
+{% if surveys %}
+    <h2>Available Surveys</h2>
+    <ul>
+        {% for survey_link in surveys %}
+            <li>{{ survey_link.survey.name }} - <a href="{% url 'fill_survey' survey_link.survey.id %}">Fill Out</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

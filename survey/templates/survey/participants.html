@@ -1,0 +1,114 @@
+{% load i18n %}
+{% load static %}
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0px;
+        padding: 0;
+    }
+    .navbar-nav{
+        color: white;
+      }
+      .nav-link{
+        color: white;
+      }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .add-participant-btn {
+        background-color: rgb(50, 139, 139);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .add-participant-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<nav class="navbar sticky-top flex-md-nowrap p-0 shadow" style="background-color: rgb(50, 139, 139);">
+    <a href="/survey">
+        <img align="left" src="{% static 'UpdateLogo.png' %}" alt="Mushroom Solutions" />
+    </a>
+
+    <ul class="navbar-nav px-3" style="display: flex; flex-direction: row; align-items:center;">
+        <li class="nav-item text-nowrap">
+            <div href="" class="nav-link">
+                <h4 class="text text-capitalize" style="color: rgb(207, 219, 228);">
+                    <strong>Hello, Welcome to Mushroom Solutions</strong>
+                </h4>
+            </div>
+        </li>
+        <div>
+                <ul class="navbar-nav" style="display: flex; flex-direction: row; margin-left:90%;">
+                    <li class="nav-item" style="margin-left: 20px;">
+                        <a class="nav-link" href="{% url 'adverse_events' %}">Adverse Events</a>
+                    </li>
+                    <li class="nav-item" style="margin-left: 20px;">
+                        <a class="nav-link" href="#">link-3</a>
+                    </li>
+                    <li class="nav-item" style="margin-left: 20px;">
+                        <a class="nav-link" href="#">link-4</a>
+                    </li>
+                </ul>
+        </div>
+    </ul>
+</nav>
+
+<!-- Scripts -->
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/timer.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script type="text/javascript" src="{% static 'survey/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'survey/js/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'survey/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'survey/js/custom.js' %}"></script>
+<script type="text/javascript" src="{% static 'survey/js/flatpickr.min.js' %}"></script>
+<h2>Participants</h2>
+<a href="{% url 'add_participant' %}"><button class="add-participant-btn">Add Participant</button></a>
+    <table>
+        <thead>
+            <tr>
+                <th><a href="?sort=id">ID</a></th>
+                <th><a href="?sort=name">Name</a></th>
+                <th><a href="?sort=birth_date">Birth Date</a></th>
+                <th><a href="?sort=clinical_site">Clinical Site</a></th>
+                <th><a href="?sort=enrollment_status">Enrollment Status</a></th>
+                <th><a href="?sort=exclusion_reason">Exclusion Reason</a></th>
+                <th><a href="?sort=enrollment_date">Enrollment Date</a></th>
+                <th><a href="?sort=screening_date">Screening Date</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participants %}
+            <tr>
+                <td>{{ participant.id }}</td>
+                <td><a href="{% url 'participant_detail' participant.id %}">{{ participant.name }}</a></td>
+                <td>{{ participant.birth_date }}</td>
+                <td>{{ participant.clinical_site.name }}</td>
+                <td>{{ participant.enrollment_status }}</td>
+                <td>{{ participant.exclusion_reason }}</td>
+                <td>{{ participant.enrollment_date }}</td>
+                <td>{{ participant.screening_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    

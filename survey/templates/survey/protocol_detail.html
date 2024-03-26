@@ -1,0 +1,24 @@
+{% extends 'survey/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Surveys" %}{% endblock title %}
+
+{% block body %}
+
+<h1>Protocol: {{ protocol.title }}</h1>
+
+{% if surveys %}
+    <h2>Surveys</h2>
+    <ul>
+        {% for survey_link in surveys %}
+        <li class="site-card-survey">
+            <a href="{% url 'survey_detail' survey_link.survey.id %}">{{ survey_link.survey.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No surveys found for this protocol.</p>
+{% endif %}
+
+<a href="{% url 'site_selection' protocol.clinical_site.id %}">Back to Site Selection</a>
+{% endblock %}
